@@ -15,6 +15,7 @@ import ShareIcon from "@mui/icons-material/Share";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import Loading from "./Loading";
+import NavbarTop from "./Navbar";
 
 const ExpandMore = styled((props) => {
 	const { expand, ...other } = props;
@@ -29,7 +30,7 @@ const ExpandMore = styled((props) => {
 
 export default function DispalyeCard() {
 	const [expanded, setExpanded] = React.useState(false);
-	const [news,SetNews] = React.useState([])
+	const [news, SetNews] = React.useState([]);
 	const [loading, Setloading] = React.useState(false);
 	const handleExpandClick = () => {
 		setExpanded(!expanded);
@@ -37,7 +38,7 @@ export default function DispalyeCard() {
 
 	async function TopNews() {
 		const Finalresult = await fetch(
-			"https://gnews.io/api/v4/top-headlines?max=5&token=c5c58e464ebea536f004c78747ad5fe1"
+			"https://gnews.io/api/v4/top-headlines?max=5&lang=te&country=in&token=c5c58e464ebea536f004c78747ad5fe1"
 		);
 		const result = await Finalresult.json();
 		const res = result.articles;
@@ -51,63 +52,85 @@ export default function DispalyeCard() {
 
 	return (
 		<>
-			{loading ? (news.map((e) => {
-				return (
-					<Card sx={{ maxWidth: 345 }}>
-						<CardHeader
-							avatar={
-								<Avatar
-									sx={{ bgcolor: red[500] }}
-									aria-label="recipe"
-								>
-									N
-								</Avatar>
-							}
-							action={
-								<IconButton aria-label="settings">
-									<MoreVertIcon />
-								</IconButton>
-							}
-							title={e.title}
-							subheader={e.publishedAt}
-						/>
-						<CardMedia
-							component="img"
-							height="194"
-							image={e.image}
-							alt={e.source.name}
-						/>
-						<CardContent>
-							<Typography variant="body2" color="text.secondary">
-								{e.description}
-							</Typography>
-						</CardContent>
-						<CardActions disableSpacing>
-							<IconButton aria-label="add to favorites">
-								<FavoriteIcon />
-							</IconButton>
-							<IconButton aria-label="share">
-								<ShareIcon />
-							</IconButton>
-							<ExpandMore
-								expand={expanded}
-								onClick={handleExpandClick}
-								aria-expanded={expanded}
-								aria-label="show more"
+		<NavbarTop/>
+			{loading ? (
+				<div className="newsDisplayData">
+					{news.map((e) => {
+						return (
+							<div
+								key={e.publishedAt}
+								className="newsDisplayData"
 							>
-								<ExpandMoreIcon />
-							</ExpandMore>
-						</CardActions>
-						<Collapse in={expanded} timeout="auto" unmountOnExit>
-							<CardContent>
-								<Typography paragraph>Content:</Typography>
-								<Typography paragraph>{e.content}</Typography>
-							</CardContent>
-						</Collapse>
-					</Card>
-				);
-			})) : <Loading/>}
-
+								<Card sx={{ maxWidth: 345 }}>
+									<CardHeader
+										avatar={
+											<Avatar
+												sx={{ bgcolor: red[500] }}
+												aria-label="recipe"
+											>
+												T
+											</Avatar>
+										}
+										action={
+											<IconButton aria-label="settings">
+												<MoreVertIcon />
+											</IconButton>
+										}
+										title={e.title}
+										subheader={e.publishedAt}
+									/>
+									<CardMedia
+										component="img"
+										height="194"
+										image={e.image}
+										alt={e.source.name}
+									/>
+									<CardContent>
+										<Typography
+											variant="body2"
+											color="text.secondary"
+										>
+											{e.description}
+										</Typography>
+									</CardContent>
+									<CardActions disableSpacing>
+										<IconButton aria-label="add to favorites">
+											<FavoriteIcon />
+										</IconButton>
+										<IconButton aria-label="share">
+											<ShareIcon />
+										</IconButton>
+										<ExpandMore
+											expand={expanded}
+											onClick={handleExpandClick}
+											aria-expanded={expanded}
+											aria-label="show more"
+										>
+											<ExpandMoreIcon />
+										</ExpandMore>
+									</CardActions>
+									<Collapse
+										in={expanded}
+										timeout="auto"
+										unmountOnExit
+									>
+										<CardContent>
+											<Typography paragraph>
+												Content:
+											</Typography>
+											<Typography paragraph>
+												{e.content}
+											</Typography>
+										</CardContent>
+									</Collapse>
+								</Card>
+							</div>
+						);
+					})}
+				</div>
+			) : (
+				<Loading />
+			)}
 		</>
 	);
 }

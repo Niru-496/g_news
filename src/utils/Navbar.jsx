@@ -67,15 +67,16 @@ export default function NavbarTop({callback}) {
 			<AppBar position="static">
 				<Toolbar>
 					<Search>
-						<SearchIconWrapper>
-							<SearchIcon />
-						</SearchIconWrapper>
 						<StyledInputBase
 							placeholder="Search…"
 							inputProps={{ "aria-label": "search" }}
 							onChange={(e) => HandleChange(e.target.value)}
 						/>
-					</Search>
+                        </Search>
+
+					<SearchIconWrapper>
+						<SearchIcon />
+                    </SearchIconWrapper>
 				</Toolbar>
 			</AppBar>
 		</Box>

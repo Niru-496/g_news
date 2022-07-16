@@ -4,8 +4,8 @@ import DispalyeCard from "../utils/DisPlayCard";
 export default function AllRoutes() {
 	return (
 		<Routes>
-			<Route path="/" element={<DispalyeCard/>} />
-			{/* <Route path="/" element={<Home/>}/> */}
+			{/* <Route path="/trending" element={<DispalyeCard/>} /> */}
+			<Route path="/" element={<Home/>}/>
 		</Routes>
 	);
 }

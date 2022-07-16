@@ -1,6 +1,6 @@
 import * as React from "react";
 import { useEffect, useState } from "react";
-import DispalyDataCard from "../utils/DisPlayCard";
+import DispalyDataCard from "./DisPlayCard";
 import Loading from "../utils/Loading";
 import NavbarTop from "../utils/Navbar";
 import { styled } from "@mui/material/styles";
@@ -34,7 +34,7 @@ export default function Home(params) {
 
 	async function TopNews() {
 		const Finalresult = await fetch(
-			"https://gnews.io/api/v4/top-headlines?max=5&token=c5c58e464ebea536f004c78747ad5fe1"
+			"https://gnews.io/api/v4/top-headlines?max=5&token=5cdaddd31d10c3cde5946830e3bdf760"
 		);
 		const result = await Finalresult.json();
 		const res = result.articles;
@@ -43,7 +43,7 @@ export default function Home(params) {
 	}
 
 	React.useEffect(() => {
-		TopNews();
+		// TopNews();
 	}, []);
 
 	return (

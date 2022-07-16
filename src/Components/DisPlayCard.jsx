@@ -14,9 +14,12 @@ import FavoriteIcon from "@mui/icons-material/Favorite";
 import ShareIcon from "@mui/icons-material/Share";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
-import Loading from "./Loading";
-import NavbarTop from "./Navbar";
-
+import Loading from "../utils/Loading";
+import NavbarTop from "../utils/Navbar";
+import CountrySelect from "../utils/CountryOptions";
+import LanguageOptions from "../utils/LanguagesOption";
+import SearchOption from "../utils/SearchOption";
+import Button from "@mui/material/Button";
 const ExpandMore = styled((props) => {
 	const { expand, ...other } = props;
 	return <IconButton {...other} />;
@@ -32,33 +35,66 @@ export default function DispalyeCard() {
 	const [expanded, setExpanded] = React.useState(false);
 	const [news, SetNews] = React.useState([]);
 	const [loading, Setloading] = React.useState(false);
+	const [country, Setcountry] = React.useState("in");
+	const [language, Setlanguage] = React.useState("te");
+	// const [search, Setsearch] = React.useState("bmw");
 	const handleExpandClick = () => {
 		setExpanded(!expanded);
 	};
 
-	async function TopNews() {
+	async function TopNews(language,country) {
 		const Finalresult = await fetch(
-			"https://gnews.io/api/v4/top-headlines?max=5&lang=te&country=in&token=c5c58e464ebea536f004c78747ad5fe1"
+			`https://gnews.io/api/v4/top-headlines?max=5&lang=${language}&country=${country}&token=5cdaddd31d10c3cde5946830e3bdf760`
 		);
 		const result = await Finalresult.json();
 		const res = result.articles;
 		SetNews(res);
 		Setloading(true);
+
+
 	}
 
-	React.useEffect(() => {
-		TopNews();
-	}, []);
+
+	function ChangeCountry(value) {
+		Setcountry(value);
+		console.log(country)
+
+	}
+	function ChangeLanguage(value) {
+		Setlanguage(value);
+		console.log(language);
+
+	}
+	// function ChangeSearch(value) {
+	// 	Setsearch(value);
+
+	// }
+	React.useEffect(()=>{
+		TopNews()
+	},[country,language])
+
 
 	return (
 		<>
-		<NavbarTop/>
+			<NavbarTop />
+			<div className="HomeDisplayDiv">
+				<CountrySelect ChangeCountry={ChangeCountry} />
+				<LanguageOptions ChangeLanguage={ChangeLanguage} />
+				{/* <SearchOption ChangeSearch={ChangeSearch} /> */}
+				<Button
+					variant="contained"
+					color="success"
+					onClick={() => TopNews( language, country)}
+				>
+					Find
+				</Button>
+			</div>
 			{loading ? (
 				<div className="newsDisplayData">
-					{news.map((e) => {
+					{news.map((e,i) => {
 						return (
 							<div
-								key={e.publishedAt}
+								key={i}
 								className="newsDisplayData"
 							>
 								<Card sx={{ maxWidth: 345 }}>

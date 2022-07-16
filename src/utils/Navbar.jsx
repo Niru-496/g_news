@@ -20,7 +20,7 @@ import ListItemText from "@mui/material/ListItemText";
 import MailIcon from "@mui/icons-material/Mail";
 import WhatshotIcon from "@mui/icons-material/Whatshot";
 import PersonSearchIcon from "@mui/icons-material/PersonSearch";
-import DispalyeCard from "./DisPlayCard";
+import DispalyeCard from "../Components/DisPlayCard";
 import { useNavigate } from "react-router-dom";
 const drawerWidth = 240;
 

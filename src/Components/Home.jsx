@@ -43,7 +43,7 @@ export default function Home(params) {
 	}
 
 	React.useEffect(() => {
-		// TopNews();
+		TopNews();
 	}, []);
 
 	return (

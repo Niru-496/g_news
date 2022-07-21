@@ -44,7 +44,7 @@ export default function SearchDisplay() {
 
 	async function SearchNews(search,language, country) {
 		const Finalresult = await fetch(
-			`https://gnews.io/api/v4/search?q=${search}&max=5&lang=${language}&country=${country}&token=5cdaddd31d10c3cde5946830e3bdf760`
+			`https://gnews.io/api/v4/search?q=${search}&max=5&lang=${language}&country=${country}&token=257b8de55938ee7b9d2affc956a93379`
 		);
 		const result = await Finalresult.json();
 		const res = result.articles;

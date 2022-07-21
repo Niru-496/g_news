@@ -7,7 +7,7 @@ export default function AllRoutes() {
 		<Routes>
 			<Route path="/" element={<Home />} />
 			<Route path="/trending" element={<DispalyeCard />} />
-			<Route path="/search" element={<SearchDisplay/>} />
+			<Route path="/search" element={<SearchDisplay />} />
 		</Routes>
 	);
 }

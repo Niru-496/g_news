@@ -1,4 +1,5 @@
-# Web-Scrapping
+# G_news
+
 
 This assignment is given by anakin to get the latitudes and longtudes of restaurents by using puppeteer.
 
